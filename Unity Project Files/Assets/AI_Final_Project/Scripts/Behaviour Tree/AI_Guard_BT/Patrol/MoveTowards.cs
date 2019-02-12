@@ -21,6 +21,8 @@ public class MoveTowards : Leaf
         //    return NodeStates.RUNNING;
         //}
 
+        Debug.Log("Moving towards Location");
+
         m_agent.destination = m_guardBlackboard.m_destination;
         return NodeStates.SUCCESS;
     }
