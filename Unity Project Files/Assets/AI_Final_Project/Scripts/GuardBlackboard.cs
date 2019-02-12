@@ -10,4 +10,6 @@ public class GuardBlackboard : MonoBehaviour
 
     public Vector3 m_destination;
     public string m_patrolPoints;
+
+    public GameObject[] activeAgents;
 }

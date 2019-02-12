@@ -29,7 +29,7 @@ public class AI_Guard_BT : MonoBehaviour
         Sequence patrol = new Sequence("patrol",
             new PickLocation(ref guardBlackboard, ref agent),
             new MoveTowards(ref guardBlackboard, ref agent));
-        
+
         /*Sequence tired = new Sequence("tired",
             AmITired,
             FindBed,
@@ -50,10 +50,8 @@ public class AI_Guard_BT : MonoBehaviour
             thirsty,
             tired);*/
 
-        /*Sequence shouldConverse = new Sequence("shouldConverse",
-            IsAnotherGuardNear,
-            MoveTowards,
-            Converse);*/
+        Sequence shouldConverse = new Sequence("shouldConverse",
+            new ShouldConverse(ref guardBlackboard, ref agent));
         #endregion
 
         #region ENGAGE BEHAVIOURS
@@ -61,7 +59,7 @@ public class AI_Guard_BT : MonoBehaviour
         #endregion
 
         Selector idle = new Selector("idle",
-            //shouldConverse,
+            shouldConverse,
             //needs,
             patrol);
 
