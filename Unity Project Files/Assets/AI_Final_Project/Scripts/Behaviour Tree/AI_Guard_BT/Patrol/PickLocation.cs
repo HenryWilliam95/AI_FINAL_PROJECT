@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class PickLocation : Leaf
+public class PickLocation : Node
 {
     GameObject[] patrolLocations;
     GuardBlackboard m_guardBlackboard;
@@ -21,21 +21,19 @@ public class PickLocation : Leaf
         m_guardBlackboard.m_destination = patrolLocations[dest].transform.position;
     }
 
-    public override NodeStates Run()
+    public override Status Run()
     {
         //Debug.Log(dest);
         // if there are no locations found, then exit out
         if (patrolLocations == null)
         {
-            return NodeStates.FAILURE;
+            return Status.FAILURE;
         }
-
-        Debug.Log("Picking Location");
 
         // If the agent is still traveling to the location do not reassign
         if (m_agent.remainingDistance > 0.6)
         {
-            return NodeStates.SUCCESS;
+            return Status.SUCCESS;
         }
 
         // If the agent is close to the destination 
@@ -45,6 +43,6 @@ public class PickLocation : Leaf
             dest = Random.Range(0, patrolLocations.Length);
             m_guardBlackboard.m_destination = patrolLocations[dest].transform.position;
         }
-        return NodeStates.SUCCESS;
+        return Status.SUCCESS;
     }
 }

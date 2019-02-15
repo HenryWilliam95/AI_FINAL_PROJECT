@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class ShouldConverse : Leaf
+public class ShouldConverse : Node
 {
     public GameObject[] nearbyAgents;
 
@@ -17,19 +17,19 @@ public class ShouldConverse : Leaf
 
     }
 
-    public override NodeStates Run()
+    public override Status Run()
     {
-        int i = 0;
-        foreach (var agent in m_guardBlackboard.activeAgents)
-        {
-            if (Vector3.Distance(m_agent.gameObject.transform.position, agent.transform.position) > 2f)
-            {
-                Debug.Log(agent.name + " is near " + agent.name);
-                return NodeStates.SUCCESS;
-            }
-        }
+        //int i = 0;
+        //foreach (var agent in m_guardBlackboard.activeAgents)
+        //{
+        //    if (Vector3.Distance(m_agent.gameObject.transform.position, agent.transform.position) > 2f)
+        //    {
+        //        Debug.Log(agent.name + " is near " + agent.name);
+        //        return NodeStates.SUCCESS;
+        //    }
+        //}
 
-        return NodeStates.FAILURE;
+        return Status.FAILURE;
     }
 
 }

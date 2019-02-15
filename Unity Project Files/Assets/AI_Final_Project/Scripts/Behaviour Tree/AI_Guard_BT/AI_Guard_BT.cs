@@ -8,12 +8,14 @@ public class AI_Guard_BT : MonoBehaviour
     Node behaviourTree;
 
     [SerializeField]    GuardBlackboard guardBlackboard;
+    [SerializeField]    GlobalBlackboard globalBlackboard;
     [SerializeField]    NavMeshAgent agent;
 
 	// Use this for initialization
 	void Awake ()
     {     
         guardBlackboard = GetComponent<GuardBlackboard>();
+        globalBlackboard = FindObjectOfType<GlobalBlackboard>();
         agent = GetComponent<NavMeshAgent>();
         behaviourTree = InitializeBahaviourTree();
     }
@@ -26,7 +28,7 @@ public class AI_Guard_BT : MonoBehaviour
     Node InitializeBahaviourTree()
     {
         #region IDLE BEHAVIOURS
-        Sequence patrol = new Sequence("patrol",
+        SequenceNode patrol = new SequenceNode("patrol",
             new PickLocation(ref guardBlackboard, ref agent),
             new MoveTowards(ref guardBlackboard, ref agent));
 
@@ -50,20 +52,21 @@ public class AI_Guard_BT : MonoBehaviour
             thirsty,
             tired);*/
 
-        Sequence shouldConverse = new Sequence("shouldConverse",
-            new ShouldConverse(ref guardBlackboard, ref agent));
+        SequenceNode shouldConverse = new SequenceNode("shouldConverse",
+            new IsFriendlyNearby(ref guardBlackboard, ref globalBlackboard));
         #endregion
 
         #region ENGAGE BEHAVIOURS
 
         #endregion
 
-        Selector idle = new Selector("idle",
+        SelectorNode idle = new SelectorNode("idle",
             shouldConverse,
             //needs,
             patrol);
+            
 
-        Selector root = new Selector("root",
+        SelectorNode root = new SelectorNode("root",
             idle);
 
         return root;
