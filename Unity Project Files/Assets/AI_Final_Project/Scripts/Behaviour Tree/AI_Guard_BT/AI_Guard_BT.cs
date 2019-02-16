@@ -53,7 +53,8 @@ public class AI_Guard_BT : MonoBehaviour
             tired);*/
 
         SequenceNode shouldConverse = new SequenceNode("shouldConverse",
-            new IsFriendlyNearby(ref guardBlackboard, ref globalBlackboard));
+            new IsFriendlyNearby(ref guardBlackboard, ref globalBlackboard),
+            new ShouldConverse(ref guardBlackboard, ref agent));
         #endregion
 
         #region ENGAGE BEHAVIOURS

@@ -19,17 +19,20 @@ public class ShouldConverse : Node
 
     public override Status Run()
     {
-        //int i = 0;
-        //foreach (var agent in m_guardBlackboard.activeAgents)
-        //{
-        //    if (Vector3.Distance(m_agent.gameObject.transform.position, agent.transform.position) > 2f)
-        //    {
-        //        Debug.Log(agent.name + " is near " + agent.name);
-        //        return NodeStates.SUCCESS;
-        //    }
-        //}
+        // Stop the agents
+        m_agent.isStopped = true;
+        m_guardBlackboard.converseAgent.GetComponent<NavMeshAgent>().isStopped = true;
 
-        return Status.FAILURE;
+        // Make them look at each other
+        m_guardBlackboard.converseAgent.gameObject.transform.LookAt(this.m_guardBlackboard.gameObject.transform);
+        m_guardBlackboard.gameObject.transform.LookAt(m_guardBlackboard.converseAgent.gameObject.transform);
+
+        // Perform some kind of action
+
+        // Resume On path
+
+
+
+        return Status.SUCCESS;
     }
-
 }

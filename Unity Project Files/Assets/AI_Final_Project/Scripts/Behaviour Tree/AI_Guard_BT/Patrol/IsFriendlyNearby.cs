@@ -24,7 +24,7 @@ public class IsFriendlyNearby : Node {
 
             if (guardBlackboard.GetDistance(globalBlackboard.guardBlackboards[i].GetPosition()) < 5f)
             {
-                Debug.Log(guardBlackboard.name + " is close to: " + globalBlackboard.guardBlackboards[i].name);
+                guardBlackboard.converseAgent = globalBlackboard.guardBlackboards[i].gameObject;
                 return Status.SUCCESS; 
             }
 

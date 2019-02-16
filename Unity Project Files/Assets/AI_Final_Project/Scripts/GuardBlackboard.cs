@@ -11,19 +11,11 @@ public class GuardBlackboard : MonoBehaviour
     public Vector3 m_destination;
     public string m_patrolPoints;
 
-    public GameObject[] activeAgents;
-    public AI_Guard_BT[] aI_Guard_BTs;
+    public GameObject converseAgent;
 
     private void Start()
     {
-        aI_Guard_BTs = GetComponents<AI_Guard_BT>();
 
-        int i = 0;
-        foreach (AI_Guard_BT item in aI_Guard_BTs)
-        {
-            activeAgents[i] = item.gameObject;
-            i++;
-        }
     }
 
     public Vector3 GetPosition()
