@@ -39,7 +39,7 @@ public class SelectorNode : CompositeNode
             }
 
             // If we reach the end of the list of children so return a failure to the parent
-            if (++currentChild == GetChildren().Count + 1)
+            if (++currentChild == GetChildren().Count)
             {
                 return Status.FAILURE;
             }
@@ -54,7 +54,7 @@ public class SequenceNode : CompositeNode
     public SequenceNode(string name, params Node[] child) : base(name, child) { }
 
     // When node is created or finished, reset the iterator for the list of children
-    public override void OnStart() { currentChild = 0; }
+    public override void OnStart() { currentChild = 0;}
     public override void OnTerminate(Status _status) { currentChild = 0; }
 
     public override Status Run()
@@ -71,7 +71,7 @@ public class SequenceNode : CompositeNode
             }
 
             // If we have reached the end of the list, then the sequence has succeeded
-            if (++currentChild == GetChildren().Count + 1)
+            if (++currentChild == GetChildren().Count)
             {
                 return Status.SUCCESS;
             }
