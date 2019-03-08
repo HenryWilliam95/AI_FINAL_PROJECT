@@ -28,6 +28,7 @@ public class IsFriendlyNearby : Node {
                 // If a guard is close, ensure they are not already in a conversation
                 if (globalBlackboard.guardBlackboards[i].GetGuardState() == GuardBlackboard.GuardState.conversing)
                 {
+                    Debug.Log("Converse");
                     // If the AI is conversing with another agent, move on and reset timers
                     if (globalBlackboard.guardBlackboards[i].converseAgent != this.guardBlackboard.gameObject)
                     {

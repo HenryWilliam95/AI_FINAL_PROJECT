@@ -18,6 +18,14 @@ public class AttemptConversation : Node
             return Status.FAILURE;
         }
 
+        for (int i = 0; i < guardBlackboard.GetGuardBlackboard().Length; i++)
+        {
+            if (guardBlackboard.GetGuardBlackboard()[i].GetTriedToConverse() == true)
+            {
+                return Status.FAILURE;
+            }
+        }
+
         return Status.SUCCESS;
     }
 }

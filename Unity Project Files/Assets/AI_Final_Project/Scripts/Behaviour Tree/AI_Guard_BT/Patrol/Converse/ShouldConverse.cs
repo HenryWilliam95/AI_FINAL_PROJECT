@@ -30,7 +30,10 @@ public class ShouldConverse : Node
         }
 
         // Perform some kind of action
-        m_guardBlackboard.StartCoroutine("ConversationWait", 4);
+        if (m_guardBlackboard.GetFinishedConversation() == false)
+        {
+            m_guardBlackboard.StartCoroutine("ConversationWait", 4);
+        }
         
 
         // If the conversation is finished resume on path
@@ -38,8 +41,11 @@ public class ShouldConverse : Node
         {
             Debug.Log("WOOOOOOAAAHHHHOOOOO");
             m_agent.isStopped = false;
+            m_agent.destination = m_guardBlackboard.m_destination;
             m_guardBlackboard.SetGuardState(GuardBlackboard.GuardState.patrolling);
             m_guardBlackboard.converseAgent = null;
+            m_guardBlackboard.SetTriedToConverse(true);
+            m_guardBlackboard.SetFinishedConversation(false); 
             return Status.SUCCESS;
         }
 

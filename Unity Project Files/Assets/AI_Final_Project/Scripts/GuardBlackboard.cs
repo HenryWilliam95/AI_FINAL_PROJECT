@@ -7,7 +7,7 @@ public class GuardBlackboard : MonoBehaviour
 {
     // AI States
     public enum GuardState { patrolling, hunting, conversing }
-    private GuardState guardstate;
+    public GuardState guardstate;
 
     // Player Sighting
     public Vector3 m_playerLastSighting;
@@ -18,10 +18,18 @@ public class GuardBlackboard : MonoBehaviour
     public string m_patrolPoints;
 
     // Conversations
+    private const float CONVERSATION_RETY_TIMER = 10f;
     private float converseTimer = 0;
     private bool finishedConversation = false;
     private bool triedToConverse = false;
     public GameObject converseAgent;
+
+    public GlobalBlackboard globalBlackboard;
+
+    private void Start()
+    {
+        globalBlackboard = FindObjectOfType<GlobalBlackboard>();
+    }
 
     private void Update()
     {
@@ -36,7 +44,7 @@ public class GuardBlackboard : MonoBehaviour
         if (converseTimer <= 0)
         {
             triedToConverse = false;
-            converseTimer = 5f;
+            converseTimer = CONVERSATION_RETY_TIMER;
             return;
         }
 
@@ -86,7 +94,7 @@ public class GuardBlackboard : MonoBehaviour
 
         if (triedToConverse == true)
         {
-            converseTimer = 5f;
+            converseTimer = CONVERSATION_RETY_TIMER;
         }
     }
 
@@ -98,6 +106,11 @@ public class GuardBlackboard : MonoBehaviour
     public float GetDistance(Vector3 guard)
     {
         return Vector3.Distance(this.transform.position, guard);
+    }
+
+    public GuardBlackboard[] GetGuardBlackboard()
+    {
+        return globalBlackboard.guardBlackboards;
     }
     #endregion
 }
