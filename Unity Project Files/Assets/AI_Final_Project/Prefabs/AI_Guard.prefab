@@ -643,6 +643,7 @@ GameObject:
   - component: {fileID: 135161981275991240}
   - component: {fileID: 114855325181712772}
   - component: {fileID: 114900893724946772}
+  - component: {fileID: 114739314040896990}
   m_Layer: 0
   m_Name: AI_Guard
   m_TagString: Enemy
@@ -2488,6 +2489,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114739314040896990
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1415055835302444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c7d377c1d61bae4083a2d9036cf84de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_fieldOfViewAngle: 110
+  player: {fileID: 0}
 --- !u!114 &114855325181712772
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2500,6 +2514,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   guardBlackboard: {fileID: 0}
+  globalBlackboard: {fileID: 0}
   agent: {fileID: 0}
 --- !u!114 &114900893724946772
 MonoBehaviour:
@@ -2512,10 +2527,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c02b23f6488a404c814e5d77dc88095, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  guardstate: 0
   m_playerLastSighting: {x: 0, y: 0, z: 0}
   m_playerInSight: 0
   m_destination: {x: 0, y: 0, z: 0}
   m_patrolPoints: Guard001_Locations
+  wanderTimer: 0
+  thisObject: {fileID: 0}
+  triedToConverse: 0
+  converseAgent: {fileID: 0}
+  globalBlackboard: {fileID: 0}
 --- !u!135 &135161981275991240
 SphereCollider:
   m_ObjectHideFlags: 1

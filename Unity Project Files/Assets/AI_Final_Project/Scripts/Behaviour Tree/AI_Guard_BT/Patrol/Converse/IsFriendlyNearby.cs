@@ -25,7 +25,7 @@ public class IsFriendlyNearby : Node {
             // Loop through all AI seeing if any are close
             if (guardBlackboard.GetDistance(globalBlackboard.guardBlackboards[i].GetPosition()) < 5f)
             {
-                // If a guard is close, ensure they are not already in a conversation
+                // If a guard is close, and in conversation
                 if (globalBlackboard.guardBlackboards[i].GetGuardState() == GuardBlackboard.GuardState.conversing)
                 {
                     Debug.Log("Converse");
@@ -38,7 +38,7 @@ public class IsFriendlyNearby : Node {
                 }
 
                 guardBlackboard.converseAgent = globalBlackboard.guardBlackboards[i].gameObject;
-                return Status.SUCCESS; 
+                return Status.SUCCESS;
             }
         }
         return Status.FAILURE;

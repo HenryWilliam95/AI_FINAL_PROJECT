@@ -26,7 +26,7 @@ public class FieldOfView : MonoBehaviour
     private void Update()
     {
         // If the player is spoted by one of the guards, move all other guards to location
-        guardBlackboard.m_playerLastSighting = globalBlackboard.lastPlayerSighting;
+        //guardBlackboard.m_playerLastSighting = globalBlackboard.lastPlayerSighting;
     }
 
     private void OnTriggerStay(Collider other)

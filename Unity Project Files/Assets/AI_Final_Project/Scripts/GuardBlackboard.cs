@@ -16,12 +16,15 @@ public class GuardBlackboard : MonoBehaviour
     // Movement
     public Vector3 m_destination;
     public string m_patrolPoints;
+    public float wanderTimer;
+
+    public GameObject thisObject;
 
     // Conversations
     private const float CONVERSATION_RETY_TIMER = 10f;
     private float converseTimer = 0;
     private bool finishedConversation = false;
-    private bool triedToConverse = false;
+    public bool triedToConverse = false;
     public GameObject converseAgent;
 
     public GlobalBlackboard globalBlackboard;
@@ -29,6 +32,7 @@ public class GuardBlackboard : MonoBehaviour
     private void Start()
     {
         globalBlackboard = FindObjectOfType<GlobalBlackboard>();
+        thisObject = gameObject;
     }
 
     private void Update()
@@ -37,6 +41,8 @@ public class GuardBlackboard : MonoBehaviour
         {
             ConversationTime();
         }
+
+        wanderTimer += Time.deltaTime;
     }
 
     public void ConversationTime()
@@ -58,7 +64,12 @@ public class GuardBlackboard : MonoBehaviour
         yield return new WaitForSeconds(seconds);
 
         SetFinishedConversation(true);
-        Debug.Log("Finished Conversation = " + finishedConversation);
+        Debug.Log(gameObject.name + " Finished Conversation = " + finishedConversation);
+    }
+
+    public void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(gameObject.transform.position, 30);
     }
 
     #region Getter&Setter

@@ -21,7 +21,9 @@ public class MoveTowards : Node
         //    return NodeStates.RUNNING;
         //}
 
-        m_agent.destination = m_guardBlackboard.m_destination;
+        m_agent.SetDestination(m_guardBlackboard.m_destination);
+
+        //m_agent.destination = m_guardBlackboard.m_destination;
         return Status.SUCCESS;
     }
 }

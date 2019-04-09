@@ -32,6 +32,7 @@ public class ShouldConverse : Node
         // Perform some kind of action
         if (m_guardBlackboard.GetFinishedConversation() == false)
         {
+            Debug.Log("Starting Coroutine for " + m_guardBlackboard.gameObject.name);
             m_guardBlackboard.StartCoroutine("ConversationWait", 4);
         }
         
@@ -39,7 +40,7 @@ public class ShouldConverse : Node
         // If the conversation is finished resume on path
         if (m_guardBlackboard.GetFinishedConversation() == true)
         {
-            Debug.Log("WOOOOOOAAAHHHHOOOOO");
+            Debug.Log(m_guardBlackboard.thisObject.name + " returned to patrolling");
             m_agent.isStopped = false;
             m_agent.destination = m_guardBlackboard.m_destination;
             m_guardBlackboard.SetGuardState(GuardBlackboard.GuardState.patrolling);
