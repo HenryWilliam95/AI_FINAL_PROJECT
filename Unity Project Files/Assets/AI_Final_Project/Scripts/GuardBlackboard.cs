@@ -67,10 +67,10 @@ public class GuardBlackboard : MonoBehaviour
         Debug.Log(gameObject.name + " Finished Conversation = " + finishedConversation);
     }
 
-    public void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(gameObject.transform.position, 30);
-    }
+    //public void OnDrawGizmos()
+    //{
+    //    Gizmos.DrawWireSphere(gameObject.transform.position, 30);
+    //}
 
     #region Getter&Setter
 

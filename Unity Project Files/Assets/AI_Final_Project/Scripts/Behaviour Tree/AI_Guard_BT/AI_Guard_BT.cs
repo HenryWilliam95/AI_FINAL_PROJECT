@@ -62,6 +62,9 @@ public class AI_Guard_BT : MonoBehaviour
 
         #endregion
 
+        SequenceNode engage = new SequenceNode("engage",
+            new IsInSight(guardBlackboard));
+
         SelectorNode idle = new SelectorNode("idle",
             shouldConverse,
             //needs,

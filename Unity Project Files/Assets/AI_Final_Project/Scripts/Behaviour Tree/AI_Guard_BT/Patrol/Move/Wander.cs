@@ -24,7 +24,7 @@ public class Wander : Node
     public override void OnStart()
     {
         guardBlackboard.m_destination = RandomNavPoint(guardBlackboard.thisObject.transform.position, wanderRadius, agent.areaMask);
-        timer = 0;
+        guardBlackboard.wanderTimer = 0;
     }
 
     public override Status Run()
@@ -32,22 +32,22 @@ public class Wander : Node
         if(DestinationReached())
         {
             guardBlackboard.m_destination = RandomNavPoint(guardBlackboard.thisObject.transform.position, wanderRadius, agent.areaMask);
-
+            guardBlackboard.wanderTimer = 0f;
             return Status.SUCCESS;
         }
 
         if(guardBlackboard.wanderTimer >= wanderTimer)
         {
             guardBlackboard.m_destination = RandomNavPoint(guardBlackboard.thisObject.transform.position, wanderRadius, agent.areaMask);
-            Debug.Log(timer);
-            timer = 0f;
+            //Debug.Log(timer);
+            guardBlackboard.wanderTimer = 0f;
             return Status.SUCCESS;
         }
 
         if(agent.pathStatus == NavMeshPathStatus.PathInvalid)
         {
             guardBlackboard.m_destination = RandomNavPoint(guardBlackboard.thisObject.transform.position, wanderRadius, agent.areaMask);
-
+            guardBlackboard.wanderTimer = 0f;
             return Status.SUCCESS;
         }
 
@@ -61,8 +61,9 @@ public class Wander : Node
 
         NavMeshHit navHit;
 
-        if(NavMesh.SamplePosition(randDirection, out navHit, _dist, _layerMask))
+        if(NavMesh.SamplePosition(randDirection, out navHit, 2f, _layerMask))
         {
+            guardBlackboard.wanderTimer = 0f;
             return navHit.position;
         }
         else
